@@ -1,7 +1,7 @@
 
 body {
   background-color: Skyblue;
-
+}
 
 #igottabeme {
   font-family: Arial, Helvetica, sans-serif;
@@ -12,7 +12,7 @@ body {
 }  
   
   
-}
+
 
 .stripey tr:nth-child(even) {
   background-color: gray;
