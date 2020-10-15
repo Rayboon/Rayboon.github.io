@@ -7,9 +7,178 @@
 </head>
 
 <body>
-  
+  <h1>Golf Scorecard</h1>
+<table class="table table-striped">
+  <tr id="0">
+    <th>Hole</th>
+    <th>Par</th>
+    <th>Score</th>
+    <th>Over</th>
+    <th>Actions</th>
+  </tr>
+  <tr id="1">
+    <td>1</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="2">
+    <td>2</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="3">
+    <td>3</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="4">
+    <td>4</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="5">
+    <td>5</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="6">
+    <td>6</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="7">
+    <td>7</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="8">
+    <td>8</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="9">
+    <td>9</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="10">
+    <td>10</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="11">
+    <td>11</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="12">
+    <td>12</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="13">
+    <td>13</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="14">
+    <td>14</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="15">
+    <td>15</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="16">
+    <td>16</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="17">
+    <td>17</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="18">
+    <td>18</td>
+    <td>4</td>
+    <td>-</td>
+    <td>-</td>
+    <td><button class="btn btn-success">+</button> <button class="btn btn-danger">-</button></td>
+  </tr>
+  <tr id="totals">
+    <td id="allTotal">TOTALS</td>
+    <td id="parTotal">-</td>
+    <td id="scoreTotal">-</td>
+    <td id="overTotal">-</td>
+    <td id="NA"></td>
+  </tr>
+</table>
+
   <img src="C:\Users\Coleb\Pictures\assignment03.png" width="300" height="400">
   
-  <script src="js/scripts.js"></script>
+  <script>
+  let elem = [];
+// assign the entire table row for hole 1 to a variable, elem
+elem[1]
+  = document.getElementById("1");
+
+// display the number of children (all td elements)
+// console.log(elem.children.length);
+// display the content of the + button, which is the first child of the fifth element
+// console.log(elem.children[4].children[0]); 
+
+// assign a function to the + button
+elem[1].children[4].children[0].onclick 
+  = function(){add1(elem[1]);};
+
+// create an "add1" function
+function add1 (elem) {
+  if(elem.children[2].innerHTML == "-") 
+    elem.children[2].innerHTML = "1";
+  else {
+    let currentScore = elem.children[2].innerHTML;
+    currentScore = Number.parseInt(currentScore);
+    elem.children[2].innerHTML = currentScore + 1;
+  }
+}
+
+  </script>
 </body>
 </html>
