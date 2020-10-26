@@ -37,7 +37,7 @@ function loadClubDistances() {
 	}
 	// otherwise create new "clubs" array, using resetAllClubs()
 	else {
-		clubs = resetAllClubDistances();
+		//clubs = resetAllClubDistances();
 		clubs = JSON.parse(localStorage.getItem("clubs"));
 	}
 	return clubs;
