@@ -128,6 +128,7 @@ function resetAllClubDistances() {
 
 // navigate to "About" screen
 function displayAbout() {
+	alert("ClubMeNow version 1.0.0");
 	// your code here
 	// window.location.href = "clubAbout.html";
 }
