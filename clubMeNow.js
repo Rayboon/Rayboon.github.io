@@ -93,6 +93,7 @@ function displayClubDistanceEntryForm(c) {
 // replace the current "clubs" array with the previous one
 function undoLastShot() {
         // your code here !
+	
 }
 
 // create a new (default) "clubs" array
@@ -137,6 +138,7 @@ function displayAbout() {
 function displayPenaltyInfo() {
 	window.location.href = "clubPenaltyInfo.html";
 }
+
 
 // ----- Functions (clubDistanceEntry.html) -----
 
