@@ -130,7 +130,7 @@ function resetAllClubDistances() {
 function displayAbout() {
 	alert("ClubMeNow version 1.0.0");
 	// your code here
-	window.location.href = "clubAbout.html";
+	//window.location.href = "clubAbout.html";
 }
 
 // navigate to "Penalty Info" screen
