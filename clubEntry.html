@@ -53,8 +53,15 @@
 	
 	function addClub() {
         // your code here
-	clubName = document.getElementById("clubName").value;		
-        clubs[clubs.length]=[clubs[clubs.length-1][0]+100, newClubName.slice(0,2),  newClubName,   0, 0, 0, 0, 10.5, 230, 200];	
+	newClubName = document.getElementById('clubName').value;
+		newClubDistances = [clubs[clubs.length - 1][0] + 100,
+			"abbrev",
+			newClubName,
+			0, 0, 0, 0, 10.5, 0, 0
+			];
+		console.log(clubs);
+		var i = clubs.push(newClubDistances);
+		// save updated stats in local storage
 		var str = JSON.stringify(clubs);
 		localStorage.setItem("clubs", str);
 	
