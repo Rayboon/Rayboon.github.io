@@ -52,25 +52,17 @@
 	
 	function addClub() {
         // your code here
-			newClubName = document.getElementById('clubName').value;
-				console.log('newClubName = '+newClubName);
-
-				// Calculate new sort position value (end of list). 
-				var newPosition = clubs[clubs.length-1][0] + 100;
-
-				// Add the new club to the list (clubs array).
-				var newClub = [newPosition,newClubName.substr(0,3),newClubName, 0,0,0,0, 90.0,0,0];
-				clubs.push(newClub);
-
-				// Store it in local storage. 
+			  var str = JSON.stringify(clubs);
+				localStorage.setItem("clubsUndo", str);
+				var newClubName = document.getElementById('clubName').value;
+				var newClubStartPosition = parseInt(clubs[clubs.length-1][0]) + 100;
+				var abbreviation = newClubName.slice(0, 4);
+				var arrTemp = [ newClubStartPosition, abbreviation, newClubName, 0, 0, 0, 0, 0, 0, 0];
+				clubs.push(arrTemp);
+				// save the clubs array
 				var str = JSON.stringify(clubs);
-				localStorage.setItem('clubsArray',str);
-
-				// Warn the user if they are attempting to carry more than 14 clubs. 
-				if(clubs.length>14) alert('Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition.');
-
-				// Refresh to home screen. 
-				window.location.href = "clubMeNow.html";
+				localStorage.setItem("clubs", str);
+				if (clubs.length > 14) window.alert("Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition.");
 	}
 	
 	// navigate to club distance LIST screen
