@@ -213,4 +213,4 @@ function updateStats(shotDistance=0) {
 	}
 }
 
-function checkForNewClubErrors() {}
+
