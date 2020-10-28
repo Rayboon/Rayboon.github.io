@@ -55,6 +55,7 @@
         // your code here
 	let club = document.getElementById('club').value;
    	let str = JSON.stringify(clubs);
+	clubs = JSON.parse(localStorage.getItem("clubs"));
 	
 	// navigate to club distance LIST screen
     function cancelClub() {
