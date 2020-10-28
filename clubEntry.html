@@ -59,15 +59,11 @@
 		clubs.push(newClub);				
 		var str = JSON.stringify(clubs);
 		localStorage.setItem('clubsArray',str);
-		 
+		 if(clubs.length>14) alert('Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition.');
 		window.location.href = "clubMeNow.html";
 			}
 	
-	function tooManyClubs() {
-		
-		if(clubs.length>14) alert('Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition.');
-		
-		{
+	
 	
 	// navigate to club distance LIST screen
     function cancelClub() {
