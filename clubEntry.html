@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -53,13 +52,14 @@
 	
 	function addClub() {
         // your code here
-	var elem = document.getElementById("clubName");
+		var elem = document.getElementById("clubName");
 				newClubName = elem.value;
 				if (newClubName.length > 0) {
 					clubs[clubs.length] = [clubs[clubs.length-1][0]+1, " " , newClubName, 0, 0, 0, 0, 20, 200, 200];
 					var storage = JSON.stringify(clubs);
 					localStorage.setItem("clubs", storage);
 				}
+	}
 	
 	// navigate to club distance LIST screen
     function cancelClub() {
