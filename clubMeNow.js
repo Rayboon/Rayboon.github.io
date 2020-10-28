@@ -92,9 +92,10 @@ function displayClubDistanceEntryForm(c) {
 
 // replace the current "clubs" array with the previous one
 function undoLastShot() {
-       let undo =  localStorage.getItem("club");
-	undo = 0;
-	window.loaction.href = "clubDistanceEntry.html";
+     	 clubs = JSON.parse(localStorage.getItem('clubsUndo'));
+	var str = JSON.stringify(clubs);
+	localStorage.setItem("clubs", str);
+	window.location.href = "clubDistanceList.html";
 	
 	
 }
