@@ -52,15 +52,22 @@
 	
 	function addClub() {
         // your code here
-	      	newClubName = document.getElementById('clubName').value;				
-		console.log('newClubName = '+newClubName);		
-		var newPosition = clubs[clubs.length-1][0] + 100;
-		var newClub = [newPosition,newClubName.substr(0,3),newClubName, 0,0,0,0, 90.0,0,0];
-		clubs.push(newClub);				
-		var str = JSON.stringify(clubs);
-		localStorage.setItem('clubsArray',str);
-		
-		window.location.href = "clubMeNow.html";
+	      newClubName = document.getElementById('clubName').value;
+				console.log('newClubName = '+newClubName);
+
+				// Calculate new sort position value (end of list). 
+				var newPosition = clubs[clubs.length-1][0] + 100;
+
+				// Add the new club to the list (clubs array).
+				var newClub = [newPosition,newClubName.substr(0,3),newClubName, 0,0,0,0, 90.0,0,0];
+				clubs.push(newClub);
+
+				// Store it in local storage. 
+				var str = JSON.stringify(clubs);
+				localStorage.setItem('clubsArray',str);
+
+				// Refresh to home screen. 
+				window.location.href = "clubMeNow.html";
 			}
 	
 	
