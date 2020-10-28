@@ -94,6 +94,7 @@ function displayClubDistanceEntryForm(c) {
 function undoLastShot() {
        let undo =  localStorage.getItem("club", c);
 	undo = 0;
+	window.loaction.href = "clubDistanceEntry.html";
 	
 	
 }
