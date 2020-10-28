@@ -53,17 +53,13 @@
 	
 	function addClub() {
         // your code here
-	newClubName = document.getElementById('clubName').value;
-		newClubDistances = [clubs[clubs.length - 1][0] + 100,
-			"abbrev",
-			newClubName,
-			0, 0, 0, 0, 10.5, 0, 0
-			];
-		console.log(clubs);
-		var i = clubs.push(newClubDistances);
-		// save updated stats in local storage
-		var str = JSON.stringify(clubs);
-		localStorage.setItem("clubs", str);
+	var elem = document.getElementById("clubName");
+				newClubName = elem.value;
+				if (newClubName.length > 0) {
+					clubs[clubs.length] = [clubs[clubs.length-1][0]+1, " " , newClubName, 0, 0, 0, 0, 20, 200, 200];
+					var storage = JSON.stringify(clubs);
+					localStorage.setItem("clubs", storage);
+				}
 	
 	// navigate to club distance LIST screen
     function cancelClub() {
