@@ -53,10 +53,10 @@
 	
 	function addClub() {
         // your code here
-	let club = document.getElementById('club').value;
-   	let str = JSON.stringify(clubs);
-	clubs = JSON.parse(localStorage.getItem("clubs"));
-	window.location.href = "clubDistanceList.html"; 
+	clubName = document.getElementById("clubName").value;		
+        clubs[clubs.length]=[clubs[clubs.length-1][0]+100, newClubName.slice(0,2),  newClubName,   0, 0, 0, 0, 10.5, 230, 200];	
+		var str = JSON.stringify(clubs);
+		localStorage.setItem("clubs", str);
 	
 	// navigate to club distance LIST screen
     function cancelClub() {
