@@ -58,7 +58,7 @@
 	var arrTemp = [ newClubStartPosition, abbreviation, newClubName, 0, 0, 0, 0, 0, 0, 0]; //Creates an array which creates default layout
 	clubs.push(arrTemp);	//pushes to end of array
 	var str = JSON.stringify(clubs);
-	localStorage.setItem("clubs", str);
+	localStorage.setItem("clubs", str); //.SET item 
 	if (clubs.length > 14) window.alert("Warning: you are only allowed to carry 14 clubs in your golf bag in match play competition."); //if there are more than 14, alert
 	}
 	
