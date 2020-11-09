@@ -134,11 +134,11 @@ function loadContent() {
 
 function buildChart() {
    //initialize empty array
-   totalDeathOver50000 = [];
+   totalDeathsOver50000 = [];
   
    for (let c of covidJsObj.Countries) {
      if (c.TotalDeaths > 50000) {
-      totalDeathOver50000.push({ 
+      totalDeathsOver50000.push({ 
          "Slug": c.Slug, 
          "NewConfirmed": c.NewConfirmed, 
          "NewDeaths": c.NewDeaths,
@@ -150,7 +150,7 @@ function buildChart() {
      }
    }
 
-   totalDeathOver50000 = _.orderBy(totalDeathOver50000, 'TotalConfirmedPer100000', 'desc');
+   totalDeathsOver50000 = _.orderBy(totalDeathsOver50000, 'TotalConfirmedPer100000', 'desc');
 
    chartData.data.datasets[0].backgroundColor 
      = "rgba(100,100,100,0.4)"; // gray
