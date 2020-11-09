@@ -155,12 +155,11 @@ function loadContent() {
 } // end function loadContent() 
 
 function buildChart() {
-   //initialize empty array
-   totalDeathsOver50000 = [];
+   totalDeathsOver50000 = [];//Create and initialize empty array
   
    for (let c of covidJsObj.Countries) {
-     if (c.TotalDeaths > 50000) {
-      totalDeathsOver50000.push({ 
+     if (c.TotalDeaths > 50000) { //Only while total deaths is greater than 50k
+      totalDeathsOver50000.push({ //push the array to fill it
          "Slug": c.Slug, 
          "NewConfirmed": c.NewConfirmed, 
          "NewDeaths": c.NewDeaths,
@@ -171,8 +170,7 @@ function buildChart() {
        });
      }
    }
-
-   totalDeathsOver50000 = _.orderBy(totalDeathsOver50000, 'TotalConfirmedPer100000', 'desc');
+   totalDeathsOver50000 = _.orderBy(totalDeathsOver50000, 'TotalConfirmedPer100000', 'desc');//order by descending
 
    chartData.data.datasets[0].backgroundColor 
      = "rgba(100,100,100,0.4)"; // gray
@@ -180,33 +178,27 @@ function buildChart() {
      = "rgba(255,0,0,0.4)"; // red
      chartData.data.datasets[2].backgroundColor 
      = "rgba(0, 0, 255, 0.4)"; // blue
-
-
+ 
+ //datasets[] intervals start from 0 as first, instead of 1
    chartData.data.datasets[0].label  
-     = 'Total Confirmed';
+     = 'Total Confirmed'; //first header, tc
    chartData.data.datasets[1].label  
-     = 'Total Deaths';
+     = 'Total Deaths';//second header, td
   chartData.data.datasets[2].label  
-     = 'Total Confirmed Per 100,000';
-   
+     = 'Total Confirmed Per 100,000';//third header, tcp1
 
    chartData.data.labels  
      = totalDeathsOver50000.map( (x) => x.Slug );
-
-   chartData.data.datasets[0].data = totalDeathsOver50000.map( (x) => x.TotalConfirmed );
-
-   chartData.data.datasets[1].data  
+   chartData.data.datasets[0].data = totalDeathsOver50000.map( (x) => x.TotalConfirmed );//data for tc is set 
+   chartData.data.datasets[1].data  //data for td is set
      = totalDeathsOver50000.map( 
        (x) => x.TotalDeath );
-
-    chartData.data.datasets[2].data  
+    chartData.data.datasets[2].data  //data for tcp1 is set
       =totalDeathsOver50000.map( 
       (x) => x.TotalConfirmedPer100000 );
-  
    chartData.options.title.text 
-     = "Covid 19 Hotspots as of " + dayjs().format('MMMM DD, YYYY');
-
-   myChart = new Chart(ctx, chartData); 
+     = "Covid 19 Hotspots as of " + dayjs().format('MMMM DD, YYYY'); //change the date to covid 19 hotspots as of + months, day, year
+   myChart = new Chart(ctx, chartData); //set new chart data
 
 }
 var populations = {
