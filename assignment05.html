@@ -169,16 +169,16 @@ function buildChart() {
    
 
    chartData.data.labels  
-     = totalDeathOver50000.map( (x) => x.Slug );
+     = totalDeathsOver50000.map( (x) => x.Slug );
 
-   chartData.data.datasets[0].data = totalDeathOver50000.map( (x) => x.TotalConfirmed );
+   chartData.data.datasets[0].data = totalDeathsOver50000.map( (x) => x.TotalConfirmed );
 
    chartData.data.datasets[1].data  
-     = totalDeathOver50000.map( 
+     = totalDeathsOver50000.map( 
        (x) => x.TotalDeath );
 
     chartData.data.datasets[2].data  
-      =totalDeathOver50000.map( 
+      =totalDeathsOver50000.map( 
       (x) => x.TotalConfirmedPer100000 );
   
    chartData.options.title.text 
