@@ -1,7 +1,3 @@
-// ---------- Global variables ----------
-
-// use "var" keyword so code works in CodePen
-
 // Covid19api variables
 var URL = "https://api.covid19api.com/summary";
 var covidJson;
@@ -69,8 +65,14 @@ var chartData = {
 
 // code below modified from: 
 // https://www.w3schools.com/js/js_ajax_intro.asp
-
+		
 function loadContent() {
+	
+  let date = localStorage.getItem("date");
+  date =dayjs(date);
+  let now = dayjs();
+  let different = now.diff(date);
+	
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 
@@ -81,34 +83,46 @@ function loadContent() {
       newConfirmedOver1000 = [];
       
 	    for (let c of covidJsObj.Countries) {
-        if (c.NewConfirmed > 10000) {
-          newConfirmedOver1000.push({ 
+          if (c.NewConfirmed > 50000) {
+          newConfirmedOver50000.push({ 
             "Slug": c.Slug, 
             "NewConfirmed": c.NewConfirmed, 
             "NewDeaths": c.NewDeaths
+	    "TotalConfirmed": c.TotalConfirmed,
+            "TotalDeath": c.TotalDeaths,
+            "Population" : populations[c.Slug],
+            "TotalConfirmedPer100000" :  100000*c.TotalConfirmed / populations[c.Slug]
           });
         }
       }
-
+	totalDeathOver50000 = _.orderBy(totalDeathOver50000, ['totalDeathOver50000', 'TotalConfirmedPer100000'], ['asc', 'desc']);
+	    
       chartData.data.datasets[0].backgroundColor 
         = "rgba(100,100,100,0.4)"; // gray
       chartData.data.datasets[1].backgroundColor 
         = "rgba(255,0,0,0.4)"; // red
       chartData.data.datasets[0].label  
-        = 'new cases';
+        = 'Total Confirmed';
       chartData.data.datasets[1].label  
-        = 'new deaths';
+        = 'Total Deaths';
+      chartData.data.datasets[2].label  
+        = 'Total Confirmed per 100,000';
       chartData.data.labels  
-        = newConfirmedOver1000.map( (x) => x.Slug );
+        = newConfirmedOver50000.map( (x) => x.Slug );
       chartData.data.datasets[0].data  
-        = newConfirmedOver1000.map( 
-          (x) => x.NewConfirmed );
+        = newConfirmedOver50000.map( 
+          (x) => x.totalConfirmed );
       chartData.data.datasets[1].data  
-        = newConfirmedOver1000.map( 
-          (x) => x.NewDeaths );
+        = totalDeathOver50000.map( 
+          (x) => x.totalConfirmedPer100000 );
+      chartData.data.datasets[2].data  
+        =totalDeathOver50000.map( 
+      (x) => x.TotalConfirmedPer100000 );
+  
+	    
+	    
       chartData.options.title.text 
-        = "Covid 19 Hotspots (" + 
-        dayjs().format("YYYY-MM-DD") + ")" ;
+        = "Covid 19 Hotspots " ;
       myChart = new Chart(ctx, chartData); 
 
     } // end if
