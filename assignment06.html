@@ -118,7 +118,7 @@
     
     
     <script>
-      // --- global variables ---
+  // --- global variables ---
 
 var loans = [
   { loan_year: 2020, loan_amount: 10000.00, loan_int_rate: 0.0453 },
@@ -126,38 +126,49 @@ var loans = [
   { loan_year: 2022, loan_amount: 10000.00, loan_int_rate: 0.0453 },
   { loan_year: 2023, loan_amount: 10000.00, loan_int_rate: 0.0453 },
   { loan_year: 2024, loan_amount: 10000.00, loan_int_rate: 0.0453 }
-]; 
-
-// --- function: loadDoc() ---
-
-function loadDoc() {
+];
+  let loanWithInterest = 0;// set loanWithInterest = 0
+  let int = 0;// set int = 0
   
-  // pre-fill defaults for first loan year
-  var defaultYear = loans[0].loan_year;
-  document.getElementById("loan_year0" + 1).value = defaultYear++;
-  var defaultLoanAmount = loans[0].loan_amount;
-  document.getElementById("loan_amt0" + 1).value = defaultLoanAmount.toFixed(2);
-  var defaultInterestRate = loans[0].loan_int_rate;
-  document.getElementById("loan_int0" + 1).value = defaultInterestRate;
-  var loanWithInterest = loans[0].loan_amount * (1 + loans[0].loan_int_rate);
-  document.getElementById("loan_bal0" + 1).innerHTML = toComma(loanWithInterest.toFixed(2));
+//chnage to money
+  let toMoney = (value) =>{
+    return `\$${toComma(value.toFixed(2))}`;
+  }
   
-  // pre-fill defaults for other loan years
-  for(var i=2; i<6; i++) {
-    document.getElementById("loan_year0" + i).value = defaultYear++;
-    document.getElementById("loan_year0" + i).disabled = true;
-    document.getElementById("loan_year0" + i).style.backgroundColor = "gray";
-    document.getElementById("loan_year0" + i).style.color = "white";
-    document.getElementById("loan_amt0" + i).value = defaultLoanAmount.toFixed(2);
-    document.getElementById("loan_int0" + i).value = defaultInterestRate;
-    document.getElementById("loan_int0" + i).disabled = true;
-    document.getElementById("loan_int0" + i).style.backgroundColor = "gray";
-    document.getElementById("loan_int0" + i).style.color = "white";
-   loanWithInterest = (loanWithInterest + defaultLoanAmount) * (1 + defaultInterestRate);
-   document.getElementById("loan_bal0" + i).innerHTML = toComma(loanWithInterest.toFixed(2));
-    } // end: "for" loop
+// --- function: ready ---
+$(document).ready( load());
+//when page loades .ready( load()) 
   
-  // all input fields: select contents on fucus
+  function load() {
+    
+    // pre-fill defaults for first loan year
+     var defaultYear = loans[0].loan_year;
+   $("#loan_year0" + 1).val(defaultYear); //changed to jquery (getelementById and value = defaultYear)
+    var defaultLoanAmount = loans[0].loan_amount; 
+   $("#loan_amt0" + 1).val(defaultLoanAmount.toFixed(2)); //changed to jquery (getelementById and value = defaultLoanAmout)
+    var defaultInterestRate = loans[0].loan_int_rate;
+  $("#loan_int0" + 1).val(defaultInterestRate); //changed to jquery (getelementById and value = defaultInterestRate)
+    var loanWithInterest = loans[0].loan_amount * (1 + loans[0].loan_int_rate);
+    $("#loan_bal0" + 1).text(toMoney(loanWithInterest)); //changed to jquery (getelementById)
+   // increment defaultYear by one
+     defaultYear++;
+    
+    // pre-fill defaults for other loan years
+    for(var i=2; i<6; i++) {
+       $("#loan_year0" + i).val(defaultYear++); //changed to jquery (getelementById and value = defaultYear++) 
+     $("#loan_year0" + i).attr("disabled","true"); //changed to jquery (getelementById)
+     $("#loan_year0" + i).css("background-color", "lightgray");//changed to jquery (getelementById and style.background-color = gray)
+     $("#loan_year0" + i).css("color", "gray");//changed to jquery (getelementById style.color = gray)
+     $("#loan_amt0" + i).val(defaultLoanAmount.toFixed(2));//changed to jquery (getelementById and value = defaultYear++)
+     $("#loan_int0" + i).val(defaultInterestRate);//changed to jquery (getelementById and value = defaultInterestRate)
+     $("#loan_int0" + i).attr("disabled","true");//changed to jquery (getelementById)
+     $("#loan_int0" + i).css("background-color", "lightgray"); //changed to jquery (getelementById and style.background-color = gray)
+     $("#loan_int0" + i).css("color", "gray");//changed to jquery (getelementById style.color = gray)
+ loanWithInterest = (loanWithInterest + defaultLoanAmount) * (1 + defaultInterestRate);
+      $("#loan_bal0" + i).text(toMoney(loanWithInterest));//changed to jquery (getelementById)
+      } // end: "for" loop
+    
+     // all input fields: select contents on fucus
   $("input[type=text]").focus(function() {
     $(this).select();
     $(this).css("background-color", "yellow");
@@ -169,23 +180,170 @@ function loadDoc() {
   // set focus to first year: messes up codepen
   // $("#loan_year01").focus();
   $("#loan_year01").blur( function() {
-    updateLoansArray();
-  });
+    updateArrayLoan();
+      });
+   // set focus to first interest rate: messes up codepen
+  //Reload interest rate
+  $("#loan_int01").blur( function() {
+    updateArrayLoan();  
+ }); //end of function
+    
+    //blur all loan amount cells
+      $("#loan_amt01").blur( function() {
+    updateArrayLoan();  
+ });
+      $("#loan_amt02").blur( function() {
+    updateArrayLoan();  
+ });
+      $("#loan_amt03").blur( function() {
+    updateArrayLoan();  
+ });
+      $("#loan_amt04").blur( function() {
+    updateArrayLoan();  
+ });
+      $("#loan_amt05").blur( function() {
+    updateArrayLoan();  
+ });//end of blur functions
+    
+ }// end: function loadDoc()
   
-} // end: function loadDoc()
+// update the form 
+  let updateForm = () => {
+    loanWithInterest = 0;
+    let totalAmt = 0;
+    for(i=1;i<6;i++){
+      let amt = loans[i-1].loan_amount
+      $(`#loan_amt0${i}`).val(amt);
+      totalAmt+= parseFloat(amt);
+     
+      loanWithInterest = (loanWithInterest + parseFloat(amt)) * (1 + loans[0].loan_int_rate);
 
+     $("#loan_bal0" + i).text(toMoney(loanWithInterest));
+    }
+   int = loanWithInterest-totalAmt;
+  $(`#loan_int_accrued`).text(toMoney(int));
+  }// end of update
+  
+  // add comma
+  function toComma(value) {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }//end 
 
-function toComma(value) {
-    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+//update years cells of form
+function updateArrayYears() {
 
-function updateLoansArray() {
-  loans[0].loan_year = parseInt($("#loan_year01").val());
   for(var i=1; i<5; i++) {
-    loans[i].loan_year = loans[0].loan_year + i;
-    $("#loan_year0"+ (i+1) ).val(loans[i].loan_year);
+
   }
+  updateForm();
+}// end of function
+  
+// UpdateLoansArray for changing interest rate
+function updateArrayInterest() {
+
+   for(var i=1; i<5; i++) {
+
+   }
+  updateForm();
+}//end of UpdateLoansArrayy
+
+// update amount and year balance
+  function updateArrayLoan(){
+     var valid = true;
+    var reg = /^[0-9.]+$/;
+   if(reg.test($("#loan_year01").val()) == false){valid = false};
+  loans[0].loan_year = parseInt($("#loan_year01").val());
+  if(reg.test($("#loan_int01").val()) == false){valid = false};
+  loans[0].loan_int_rate = ($("#loan_int01").val());
+  for(var i=1; i<5; i++) {
+   if(reg.test($("#loan_amt0" + i).val()) == false){valid = false};
+  }
+    
+    if (valid == true){
+      $(".form-control").css("color", "gray");
+    loans[0].loan_year = parseInt($("#loan_year01").val());
+      
+    for(var i=1; i<5; i++) {
+            loans[i].loan_year = loans[0].loan_year + i;
+    $("#loan_year0"+ (i+1) ).val(loans[i].loan_year);
+          loans[i].loan_int_rate = loans[0].loan_int_rate;
+    $("#loan_int0" + (i+1) ).val(loans[i].loan_int_rate);
+        
+        loans[i].loan_year = loans[0].loan_year + i;
+      }
+      for(i = 1; i<6; i++){
+        let amt = parseFloat($(`#loan_amt0${i}`).val()).toFixed(2);
+        loans[i-1].loan_amount = amt;
+      }
+      let rate = parseFloat($("#loan_int01").val());
+      for(i=0; i<5; i++){
+        loans[i].loan_int_rate = rate;
+  }
+  updateForm();
+    }
+    else{validate()};
+  };
+  // end of function
+
+// check for valid input
+function validate(){
+   $(".form-control").css("color", "red");
+  alert("Please enter in a number.");
+
+};//end of validating 
+
+
+// save button
+function saveForm(){
+	//save a new JSON object for the current loans array to localstorage, but dont overide the primary loans object 
+	var str = JSON.stringify(loans);
+	localStorage.setItem("SaveLoad", str);
+	};
+//end of function
+
+// use locastorge to get last save info // last saved button
+function lastSavedForm(){
+	//retrieve the JSON object for the saved loans object
+	loans = JSON.parse(localStorage.getItem("SaveLoad"));
+	//update the forms
+ // updateForm();
+	load();
 }
+
+	 
+// angular
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+  $scope.payments =[];
+  $scope.processForm = function () {
+    updateForm();
+    let total = loanWithInterest;
+    let intRate = loans[0].loan_int_rate;
+    let r = intRate / 12; // interest rate for one mounth
+    let n = (10 * 12); //number of months in 10 years 
+   
+    //loan payment formula //http://webp.svsu.edu/~qefriebe/cis255/as06/as06.html used as refernce. changed for 10 year
+    //https://www.thebalance.com/loan-payment-calculations-315564
+   let pay = 12 * (total / ((((1+r)**(n))-1)/(r *(1+r)**(n)))); // yearly playment
+    console.log(r);
+    for (let i = 0; i < 9; i++) { //first nine years
+      total -= pay // subtract year payment from total
+      let int = (total * intRate); //set int = interest 
+      $scope.payments[i]={ // set payment[] = year, payment, int amt, ye bal
+        "year":loans[4].loan_year + i + 1, //incress by one year 
+        "payment": toMoney(pay), // one year payment in money
+        "amt": toMoney(int), // interest charged that year in money
+        "ye": toMoney(total += int) // new balance with interest of that year
+      }
+    }
+    $scope.payments[9] = { //last year
+      "year":loans[4].loan_year + 10, // tenth year
+      "payment": toMoney(total), // pay off the last of the loan 
+      "amt": toMoney(0), // no interest 
+      "ye":toMoney(0) // no money to pay back
+    }
+  }
+});//end
     </script>
     
 	</body>
