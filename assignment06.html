@@ -292,26 +292,7 @@ function validate(){
   alert("Please enter in a number.");
 
 };//end of validating 
-
-
-// save button
-function saveForm(){
-	//save a new JSON object for the current loans array to localstorage, but dont overide the primary loans object 
-	var str = JSON.stringify(loans);
-	localStorage.setItem("SaveLoad", str);
-	};
-//end of function
-
-// use locastorge to get last save info // last saved button
-function lastSavedForm(){
-	//retrieve the JSON object for the saved loans object
-	loans = JSON.parse(localStorage.getItem("SaveLoad"));
-	//update the forms
- // updateForm();
-	load();
-}
-
-	 
+ 
 // angular
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope) {
