@@ -230,7 +230,7 @@ $(document).ready( load());
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }//end 
 
-	 //update years cells of form
+//update years cells of form
 function updateArrayYears() {
 
   for(var i=1; i<5; i++) {
@@ -238,7 +238,7 @@ function updateArrayYears() {
   }
   updateForm();
 }// end of function
-
+  
 // UpdateLoansArray for changing interest rate
 function updateArrayInterest() {
 
@@ -292,6 +292,25 @@ function validate(){
   alert("Please enter in a number.");
 
 };//end of validating 
+
+
+// save button
+function saveForm(){
+	//save a new JSON object for the current loans array to localstorage, but dont overide the primary loans object 
+	var str = JSON.stringify(loans);
+	localStorage.setItem("SaveLoad", str);
+	};
+//end of function
+
+// use locastorge to get last save info // last saved button
+function lastSavedForm(){
+	//retrieve the JSON object for the saved loans object
+	loans = JSON.parse(localStorage.getItem("SaveLoad"));
+	//update the forms
+ // updateForm();
+	load();
+}
+
 	 
 // angular
 var app = angular.module('myApp', []);
